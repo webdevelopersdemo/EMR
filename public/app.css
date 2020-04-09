@@ -1,0 +1,40 @@
+.navbar {    
+    padding: .5rem 8rem !important;
+    width: 100%;
+}
+.addnewcornonacase {
+	width: 100%;
+	float: right;
+	margin-bottom: 20px;
+}
+.error {
+	color:red;
+	font-size:12px;
+}
+.leftanel {
+	width:54%;
+	float:left;
+}
+.rightanel {
+	width: 45%;
+    float: left;
+    text-align: right;
+}
+.addpanel .leftanel {
+    width:73%;
+    float:left;
+}
+.addpanel .rightanel {
+    width: 26%;
+    float: left;
+    text-align: right;
+}
+span.rightanel input {
+    width: 200px;
+    float: left;
+    margin-right:20px;
+}
+span.rightanel select {
+    width: 200px;
+    float: left;
+}
