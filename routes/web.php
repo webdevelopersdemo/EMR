@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 Route::resource('clinic', 'ClinicController');
 Route::resource('doctor', 'DoctorController');
+Route::resource('patient','PatientController');

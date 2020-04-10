@@ -49,17 +49,21 @@ class ClinicController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($request->all(), [
-            'clinic_name' => 'required|max:255',
-            'clinic_type' => 'required|max:255',
-            'clinic_place' => 'required|max:255',
-            'clinic_description' => 'required|max:255',
-            'clinic_address' => 'required|max:255'
+            'clinic_name' => 'required|max:50|unique:clinics',
+            'clinic_type' => 'required|max:50',
+            'clinic_place' => 'required|max:50',
+            'clinic_description' => 'required',
+            'clinic_address' => 'required'
         ],[
-            'clinic_name' => 'Please enter your clinic name',
-            'clinic_type' => 'Please enter type of clinic',
-            'clinic_place' => 'Please enter your clinic place',
-            'clinic_description' => 'Please enter your clinic description',
-            'clinic_address' => 'Please enter your clinic address'
+            'clinic_name.required' => 'Please enter your clinic name.',
+            'clinic_name.max' => 'Clinic name length can not exceed 50 characters.',
+            'clinic_name.unique' => 'Clinic name already exists.',
+            'clinic_type.required' => 'Please enter type of clinic type.',
+            'clinic_type.max' => 'Clinic type length can not exceed 50 charcaters.',
+            'clinic_place.required' => 'Please enter your clinic place.',
+            'clinic_place.max' => 'Clinic place length cannot exceed 50 charcters.',
+            'clinic_description.required' => 'Please enter your clinic description.',
+            'clinic_address.required' => 'Please enter your clinic address.'
         ]);
         if ($validator->fails()) {
             return redirect('/clinic/create')->withErrors($validator)->withInput();

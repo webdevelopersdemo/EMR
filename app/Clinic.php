@@ -17,6 +17,14 @@ class Clinic extends Model
         return $this->hasMany('App\Doctor');
     }
 
+    /**
+     * Get the patients belong to clinic.
+     */
+    public function clinicPatient()
+    {
+        return $this->hasMany('App\Patient');
+    }
+
 
     /**
 	 * clinic scope search filter.
