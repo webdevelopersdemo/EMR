@@ -23,7 +23,7 @@
         <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search"/>
 
         <!-- Filter Clinic wise -->
-        <select class="form-control" name="clinic_filter">
+        <select class="form-control" name="clinic_filter" id="clinics">
           <option value=''>Select Clinic</option>
           @foreach ($clinics as $clinic)
             <option value='{{$clinic->id}}' {{$selectclinic == $clinic->id ? 'selected' : ''}}>{{$clinic->clinic_name}}</option>
@@ -31,7 +31,7 @@
         </select>
 
         <!-- Filter Doctor wise -->
-        <select class="form-control" name="doctor_filter">
+        <select class="form-control" name="doctor_filter"  id="doctors">
           <option value=''>Select Doctor</option>
           @foreach ($doctors as $doctor)
             <option value='{{$doctor->id}}' {{$selectdoctor == $doctor->id ? 'selected' : ''}}>{{$doctor->doctor_name}}</option>
@@ -71,13 +71,7 @@
             <td>{{$patient->state}}</td>
             <td>{{$patient->occupation}}</td>
             <td><a href="{{ route('patient.edit', $patient->id)}}" class="btn btn-primary">Edit</a></td>
-            <td>
-                <form action="{{ route('patient.destroy', $patient->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-            </td>
+            <td><a href="{{ route('patient.destroy', $patient->id)}}" class="btn btn-danger delete-confirm">Delete</a></td>
         </tr>
         @endforeach
   </tbody>

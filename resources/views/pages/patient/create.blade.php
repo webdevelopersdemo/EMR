@@ -16,7 +16,7 @@
           <div class="form-group">
               @csrf
               <label for="patient_clinic_id">Select Clinic:</label>
-              <select class="form-control" name="patient_clinic_id">
+              <select class="form-control" name="patient_clinic_id" id="clinics">
                 <option value=''>Select</option>
                 @foreach ($clinics as $clinic)
                   <option value='{{$clinic->id}}'>{{$clinic->clinic_name}}</option>
@@ -28,12 +28,7 @@
           </div>
           <div class="form-group">
               <label for="patient_doctor_id">Select Doctor:</label>
-              <select class="form-control" name="patient_doctor_id">
-                <option value=''>Select</option>
-                @foreach ($clinics as $clinic)
-                  <option value='{{$clinic->id}}'>{{$clinic->clinic_name}}</option>
-                @endforeach
-              </select>
+              <select class="form-control" name="patient_doctor_id" id="doctors"></select>
               @if($errors->has('patient_doctor_id'))
                   <div class="error">{{ $errors->first('patient_doctor_id') }}</div>
               @endif
@@ -111,32 +106,4 @@
   </div>
 </div>
 @endsection
-
-<script type="text/javascript">
-  $(document).ready(function ()
-  {
-    $('select[name="patient_clinic_id"]').on('change',function(){
-       var patientClinicId = $(this).val();
-       if(patientClinicId)
-       {
-          $.ajax({
-             url : 'doctors/' + patientClinicId,
-             type : "GET",
-             dataType : "json",
-             success:function(data)
-             {
-                console.log(data);
-                $('select[name="patient_doctor_id"]').empty();
-                $.each(data, function(key,value){
-                   $('select[name="patient_doctor_id"]').append('<option value="'+ value.id +'">'+ value.doctor_name +'</option>');
-                });
-             }
-          });
-       }
-       else
-       {
-          $('select[name="patient_doctor_id"]').empty();
-       }
-    });
-  });
-</script>
+ 

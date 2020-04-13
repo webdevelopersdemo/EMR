@@ -62,4 +62,24 @@ class Patient extends Model
 		    });
     	}
     }
+
+
+
+    // Mutators for patient table
+    // -----------------------------
+
+
+    /**
+     * Set the patient doctor id as integer .
+     *
+     * @param  string  $value
+     * @return integer
+     */
+    public function setPatientDoctorIdAttribute($value)
+    {
+        $this->attributes['patient_doctor_id'] = (int)$value;
+    }
+
+
+
 }

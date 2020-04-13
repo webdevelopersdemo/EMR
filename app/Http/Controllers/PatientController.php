@@ -30,9 +30,12 @@ class PatientController extends Controller
         if($request->has('search')) $search = $request->query('search');
         if($request->has('clinic_filter')) $selectclinic = $request->query('clinic_filter');
         if($request->has('doctor_filter')) $selectdoctor = $request->query('doctor_filter');
-
         $clinics = Clinic::all();
-        $doctors = Doctor::all();
+        $doctors = [];
+        if($selectclinic != '') {
+            $clinc = Clinic::find($selectclinic);
+            $doctors = $clinc->doctors;
+        }
         $patients = Patient::with('patientClinic','patientDoctor')->search($search,$selectclinic, $selectdoctor,)->orderBy($sortBy, $orderBy)->paginate($perPage);
         return view('pages.patient.index', compact('clinics', 'doctors', 'patients', 'sortBy','orderBy','search','selectdoctor','selectclinic'));
     }
@@ -85,9 +88,11 @@ class PatientController extends Controller
         if ($validator->fails()) {
             return redirect('/patient/create')->withErrors($validator)->withInput();
         }
-        $fileName = time().'.'.$request->file('image')->extension();
-        $request->file('image')->move(public_path('uploads'), $fileName);
-        $data['image'] = $fileName;
+        if($request->file('image')) {
+            $fileName = time().'.'.$request->file('image')->extension();
+            $request->file('image')->move(public_path('uploads'), $fileName);
+            $data['image'] = $fileName;
+        }
         Patient::create($data);
         return redirect('/patient')->with('success', 'Records has been successfully added.');
     }
@@ -113,7 +118,9 @@ class PatientController extends Controller
     {
         $patient = Patient::findOrFail($id);
         $clinics = Clinic::all();
-        return view('pages.patient.edit', compact('clinics','patient'));
+        $clinc = Clinic::find($patient->patient_clinic_id);
+        $doctors = $clinc->doctors;
+        return view('pages.patient.edit', compact('clinics','patient','doctors'));
     }
 
     /**
@@ -162,11 +169,12 @@ class PatientController extends Controller
                 // die;
                 return redirect('/patient/'.$id.'/edit')->withErrors($validator)->withInput();
         }
-        
-        $fileName = time().'.'.$request->file('image')->extension();
-        $request->file('image')->move(public_path('uploads'), $fileName);
         $updateData = $request->except(['_token','_method']);
-        $updateData['image'] = $fileName;
+        if($request->file('image')) {
+            $fileName = time().'.'.$request->file('image')->extension();
+            $request->file('image')->move(public_path('uploads'), $fileName);
+            $updateData['image'] = $fileName;
+        }
         Patient::whereId($id)->update($updateData);
         return redirect('/patient')->with('success', 'Record has been updated successfully');
     }
@@ -182,5 +190,26 @@ class PatientController extends Controller
         $patientcase = Patient::findOrFail($id);
         $patientcase->delete();
         return redirect('/patient')->with('success', 'Record has been deleted successfully');
+    }
+
+    /**
+     * Get doctors list according to clinic id
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getDoctors(Request $request)
+    {
+        $data = $request->all();
+        $clinic = Clinic::find($data['clinicID']);
+        $doctors = $clinic->doctors()->pluck('id', 'doctor_name')->toArray();
+        $html = '';
+        if(is_array($doctors) && !empty($doctors)) {
+            $html = '<option value="">Select</option>';
+            foreach($doctors as $name => $doctorId) {
+                $html .= '<option value="'.(int)$doctorId.'">'.$name.'</option>';
+            }
+        }
+        return response()->json(['doctors'=>$html]);
     }
 }
