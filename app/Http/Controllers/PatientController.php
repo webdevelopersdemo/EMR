@@ -59,10 +59,11 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $exp ="/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix";
         $data = $request->all();
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|unique:patients',
+            'email' => 'required|regex:/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i|unique:patients',
             'mobile' => 'required',
             'state' => 'required',
             'country' => 'required',
@@ -75,6 +76,7 @@ class PatientController extends Controller
             'name.required' => 'Please enter your name.',
             'email.required' => 'Please enter your email.',
             'email.unique' => 'Email already exits in DB.',
+            'email.regex' => 'Please enter valid email format.',
             'mobile.required' => 'Please enter your mobile number.',
             'state.required' => 'Please enter your state.',
             'country.required' => 'Please enter your country.',
@@ -136,7 +138,7 @@ class PatientController extends Controller
        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|regex:/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i',
             'mobile' => 'required',
             'state' => 'required',
             'country' => 'required',
@@ -149,6 +151,7 @@ class PatientController extends Controller
             'name.required' => 'Please enter your name.',
             'email.required' => 'Please enter your email.',
             'email.email' => 'Please enter valid email id.',
+            'email.regex' => 'Please enter valid email id.',
             'mobile.required' => 'Please enter your mobile number.',
             'state.required' => 'Please enter your state.',
             'country.required' => 'Please enter your country.',

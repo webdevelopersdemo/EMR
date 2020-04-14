@@ -12,7 +12,7 @@
   </div>
 
   <div class="card-body">
-    <form method="post" action="{{ route('patient.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('patient.store') }}" enctype="multipart/form-data" name="createpatient" id="createpatient">
           <div class="form-group">
               @csrf
               <label for="patient_clinic_id">Select Clinic:</label>
