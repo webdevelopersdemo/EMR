@@ -18,3 +18,17 @@ Route::get('/', function () {
 });
 Route::resource('clinic', 'ClinicController');
 Route::resource('doctor', 'DoctorController');
+Route::resource('patient','PatientController');
+Route::get('clinic/destroy/{id}', [
+	'as' => 'clinic.destroy', 
+	'uses' => 'ClinicController@destroy'
+]);
+Route::get('doctor/destroy/{id}', [
+	'as' => 'doctor.destroy', 
+	'uses' => 'DoctorController@destroy'
+]);
+Route::get('patient/destroy/{id}', [
+	'as' => 'patient.destroy', 
+	'uses' => 'PatientController@destroy'
+]);
+Route::post('patient/getDoctors', 'PatientController@getDoctors');

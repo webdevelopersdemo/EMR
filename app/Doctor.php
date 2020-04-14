@@ -17,6 +17,14 @@ class Doctor extends Model
 	    return $this->belongsTo('App\Clinic', 'doctor_clinic_id');
 	}
 
+    /**
+     * Get the patients belong to doctor.
+     */
+    public function doctorPatient()
+    {
+        return $this->hasMany('App\Doctor');
+    }
+
 	/**
 	 * doctor scope search filter.
 	 */

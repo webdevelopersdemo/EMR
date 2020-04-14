@@ -8,7 +8,7 @@
       <a class="nav-item nav-link" href="{{ URL::to('/') }}">Dashboard</a>
       <a class="nav-item nav-link" href="{{ URL::to('/clinic') }}">Clinic</a>
       <a class="nav-item nav-link" href="{{ URL::to('/doctor') }}">Doctors</a>
-      <a class="nav-item nav-link" href="{{ URL::to('/Patient') }}">Patients</a>
+      <a class="nav-item nav-link" href="{{ URL::to('/patient') }}">Patients</a>
     </div>
   </div>
 </nav>

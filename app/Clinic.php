@@ -14,7 +14,15 @@ class Clinic extends Model
      */
     public function doctors()
     {
-        return $this->hasMany('App\Doctor');
+        return $this->hasMany('App\Doctor', 'doctor_clinic_id');
+    }
+
+    /**
+     * Get the patients belong to clinic.
+     */
+    public function clinicPatient()
+    {
+        return $this->hasMany('App\Patient', 'patient_clinic_id');
     }
 
 

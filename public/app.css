@@ -29,6 +29,15 @@
     float: left;
     text-align: right;
 }
+.patient_div .leftanel {
+    width:33%;
+    float:left;
+}
+.patient_div .rightanel {
+    width: 65%;
+    float: left;
+    text-align: right;
+}
 span.rightanel input {
     width: 200px;
     float: left;
@@ -37,4 +46,5 @@ span.rightanel input {
 span.rightanel select {
     width: 200px;
     float: left;
+    margin-right: 19px;
 }

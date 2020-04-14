@@ -11,7 +11,7 @@
     Add clinc
   </div>
   <div class="card-body">
-    <form method="post" action="{{ route('doctor.store') }}">
+    <form method="post" action="{{ route('doctor.store') }}" name="createdoctor">
           <div class="form-group">
               @csrf
               <label for="country">Select Clinic:</label>

@@ -45,13 +45,7 @@
             <td>{{$clinic->clinic_type}}</td>
             <td>{{$clinic->clinic_address}}</td>
             <td><a href="{{ route('clinic.edit', $clinic->id)}}" class="btn btn-primary">Edit</a></td>
-            <td>
-                <form action="{{ route('clinic.destroy', $clinic->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-            </td>
+            <td><a href="{{ route('clinic.destroy', $clinic->id)}}" class="btn btn-danger delete-confirm">Delete</a></td>
         </tr>
         @endforeach
   </tbody>

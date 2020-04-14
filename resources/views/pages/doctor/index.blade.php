@@ -49,23 +49,17 @@
   </thead>
   <tbody>
     @foreach($doctors as $doctor)
-        <tr>
-            <td>{{$doctor->doctor_name}}</td>
-            <td>{{$doctor->clinic->clinic_name}}</td>
-            <td>{{$doctor->doctor_speciality}}</td>
-            <td>{{$doctor->doctor_address}}</td>
-            <td>{{$doctor->doctor_phone}}</td>
-            <td>{{$doctor->doctor_fees}}</td>
-            <td><a href="{{ route('doctor.edit', $doctor->id)}}" class="btn btn-primary">Edit</a></td>
-            <td>
-                <form action="{{ route('doctor.destroy', $doctor->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
+      <tr>
+          <td>{{$doctor->doctor_name}}</td>
+          <td>{{$doctor->clinic->clinic_name}}</td>
+          <td>{{$doctor->doctor_speciality}}</td>
+          <td>{{$doctor->doctor_address}}</td>
+          <td>{{$doctor->doctor_phone}}</td>
+          <td>{{$doctor->doctor_fees}}</td>
+          <td><a href="{{ route('doctor.edit', $doctor->id)}}" class="btn btn-primary">Edit</a></td>
+          <td><a href="{{ route('doctor.destroy', $doctor->id)}}" class="btn btn-danger delete-confirm">Delete</a></td>
+      </tr>
+      @endforeach
   </tbody>
 </table>
 {{ $doctors->links() }}
