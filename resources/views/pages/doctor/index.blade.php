@@ -38,12 +38,12 @@
   <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Clinic</th>
-      <th scope="col">Specialist</th>
-      <th scope="col">Address</th>
-      <th scope="col">Mobile</th>
-      <th scope="col">Charges</th>
+      <th scope="col">@sortablelink('doctor_name', 'Doctor')</th>
+      <th scope="col">@sortablelink('doctor_clinic_id', 'Clinic')</th>
+      <th scope="col">@sortablelink('doctor_speciality', 'Speciality')</th>
+      <th scope="col">@sortablelink('doctor_address', 'Address')</th>
+      <th scope="col">@sortablelink('doctor_phone', 'Mobile')</th>
+      <th scope="col">@sortablelink('doctor_fees', 'Fees')</th>
       <th scope="col" colspan="2">Action</th>
     </tr>
   </thead>
@@ -62,6 +62,6 @@
       @endforeach
   </tbody>
 </table>
-{{ $doctors->links() }}
+{!! $doctors->appends(request()->except('page'))->render() !!}
 <div>
 @endsection

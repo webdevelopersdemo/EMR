@@ -30,10 +30,10 @@
   <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Clinic</th>
-      <th scope="col">place</th>
-      <th scope="col">Type</th>
-      <th scope="col">Address</th>
+      <th scope="col">@sortablelink('clinic_name', 'Clinic')</th>
+      <th scope="col">@sortablelink('clinic_place', 'Place')</th>
+      <th scope="col">@sortablelink('clinic_type', 'Place')</th>
+      <th scope="col">@sortablelink('clinic_address', 'Address')</th>
       <th scope="col" colspan="2">Actions</th>
     </tr>
   </thead>
@@ -51,5 +51,8 @@
   </tbody>
 </table>
 {{ $clinics->links() }}
+
+{!! $clinics->appends(request()->except('page'))->render() !!}
+
 <div>
 @endsection

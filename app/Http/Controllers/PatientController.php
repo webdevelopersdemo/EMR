@@ -36,7 +36,7 @@ class PatientController extends Controller
             $clinc = Clinic::find($selectclinic);
             $doctors = $clinc->doctors;
         }
-        $patients = Patient::with('patientClinic','patientDoctor')->search($search,$selectclinic, $selectdoctor,)->orderBy($sortBy, $orderBy)->paginate($perPage);
+        $patients = Patient::with('patientClinic','patientDoctor')->sortable()->search($search,$selectclinic, $selectdoctor,)->orderBy($sortBy, $orderBy)->paginate($perPage);
         return view('pages.patient.index', compact('clinics', 'doctors', 'patients', 'sortBy','orderBy','search','selectdoctor','selectclinic'));
     }
 

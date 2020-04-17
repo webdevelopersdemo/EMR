@@ -25,7 +25,7 @@ class ClinicController extends Controller
         if($request->has('perPage')) $perPage = $request->query('perPage');
         if($request->has('search')) $search = $request->query('search');
 
-        $clinics = Clinic::search($search)->orderBy($sortBy, $orderBy)->paginate($perPage);
+        $clinics = Clinic::search($search)->sortable()->orderBy($sortBy, $orderBy)->paginate($perPage);
         return view('pages.clinic.index', compact('clinics', 'sortBy','orderBy','search'));
     }
 

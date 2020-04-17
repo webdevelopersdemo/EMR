@@ -12,7 +12,7 @@
   </div>
 
   <div class="card-body">
-    <form method="post" action="{{ route('patient.update', $patient->id ) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('patient.update', $patient->id ) }}" enctype="multipart/form-data" name="updatepatient" id="updatepatient">
           <div class="form-group">
               @csrf
               @method('PATCH')

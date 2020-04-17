@@ -11,7 +11,7 @@
     Add clinc
   </div>
   <div class="card-body">
-     <form method="post" action="{{ route('doctor.update', $doctor->id ) }}">
+     <form method="post" action="{{ route('doctor.update', $doctor->id ) }}" name="updatedoctor" id="updatedoctor">
           <div class="form-group">
               @csrf
               @method('PATCH')

@@ -30,7 +30,7 @@ class DoctorController extends Controller
         if($request->has('clinic_filter')) $selectclinic = $request->query('clinic_filter');
 
         $clinics = Clinic::all();
-        $doctors = Doctor::with('clinic')->search($search,$selectclinic)->orderBy($sortBy, $orderBy)->paginate($perPage);        
+        $doctors = Doctor::with('clinic')->sortable()->search($search,$selectclinic)->orderBy($sortBy, $orderBy)->paginate($perPage);        
         return view('pages.doctor.index', compact('doctors','clinics', 'sortBy','orderBy','search','selectclinic'));
     }
 
