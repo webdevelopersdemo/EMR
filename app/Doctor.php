@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Doctor extends Model
 {
+	use Sortable;
     public $table = 'doctors';
+    public $sortable = ['doctor_name','doctor_speciality','doctor_address','doctor_phone','doctor_fees'];
     protected $fillable = array('doctor_clinic_id','doctor_name','doctor_speciality','doctor_address','doctor_phone','doctor_fees');
 
     /**
