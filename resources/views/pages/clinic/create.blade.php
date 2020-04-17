@@ -11,7 +11,7 @@
     Add Clinic
   </div>
   <div class="card-body">    
-      <form method="post" action="{{ route('clinic.store') }}" name="createclinic">
+      <form method="post" action="{{ route('clinic.store') }}" name="createclinic" id="createclinic">
           <div class="form-group">
               @csrf
               <label for="country">Clinic Name:</label>
